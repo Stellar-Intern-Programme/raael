@@ -16,7 +16,11 @@ body {
   display: flex;
   border-radius: 50px;
   width: 1395px;
+<<<<<<< HEAD
   height: 753px;
+=======
+height: 753px;
+>>>>>>> 65c5518b66c67eac96d8c4731c8703f16ac86493
 }
 .right {
   position: relative;
@@ -599,7 +603,9 @@ width:fit-content;
     border-top-left-radius:30px;
     border-bottom-right-radius:0px;
     border-top-right-radius: 30px;
+
     padding-bottom: 30px;
+
 
   }
 
@@ -657,5 +663,4 @@ width:fit-content;
 .sectiune2{
   display: none;
 }
-
 }
