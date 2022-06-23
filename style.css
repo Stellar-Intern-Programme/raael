@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap');
+
+
 .background {
   display: flex;
   background-color: #87B6E1;
@@ -124,6 +127,7 @@ height: 753px;
   scrollbar-width: none; 
   padding-block:20px;
   /* padding-inline:20px; */
+  padding-right: 30px;
 }
 
 .Images::-webkit-scrollbar { 
@@ -159,6 +163,7 @@ height: 753px;
   height: 161px;
   border: 1px solid black;
   border-radius: 10px;
+  flex-shrink: 0;
 }
 
 .Plus img {
@@ -246,6 +251,7 @@ width:fit-content;
 
 .Picatura {
   width: fit-content;
+  gap:5px;
 }
 
 .Rectangle {
@@ -618,7 +624,7 @@ width:fit-content;
 
 .Nav{
   display:flex;
-  gap:23px;
+  gap: 24px;
 }
 
   .AP{
@@ -631,6 +637,7 @@ width:fit-content;
 
   .Table{
     overflow: scroll;
+    padding-bottom: 5px;
   }
 
 .Placeholder{
@@ -652,6 +659,36 @@ width:fit-content;
 
 .line:hover {
   background-color: #365B7D;;
+}
+
+.Table tr{
+  width:500px;
+  display:flex;
+  justify-content: space-between;
+}
+
+.sectiune2{
+  display:none;
+
+}
+
+.sectiune1{
+padding-bottom:40px;
+}
+
+.nor1{
+  top:10%;
+
+}
+
+.Picatura{
+  display:flex;
+  gap:5px;
+}
+
+.WF p:nth-of-type(1) {
+  margin:0;
+  padding-top: 20px;
 }
 
 }
