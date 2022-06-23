@@ -19,7 +19,7 @@ body {
   display: flex;
   border-radius: 50px;
   width: 1395px;
-height: 753px;
+  height: 753px;
 }
 .right {
   position: relative;
@@ -606,6 +606,9 @@ width:fit-content;
     border-bottom-right-radius:0px;
     border-top-right-radius: 30px;
 
+    padding-bottom: 30px;
+
+
   }
 
   .left{
@@ -660,7 +663,6 @@ width:fit-content;
 .line:hover {
   background-color: #365B7D;;
 }
-
 .Table tr{
   width:500px;
   display:flex;
