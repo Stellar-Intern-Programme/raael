@@ -1,5 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap');
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #437ab9;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #445a73;
+}
 
 .background {
   display: flex;
@@ -150,6 +168,12 @@ body {
   flex-direction: column;
   align-items:center;
   gap:12px;
+}
+
+.Poze img{
+  overflow: hidden;
+  width: 130px;
+  
 }
 
 .Plus {
@@ -691,4 +715,60 @@ padding-bottom:40px;
   padding-top: 20px;
 }
 
+}
+
+.popup-input{
+  display: flex;
+  height: 9%;
+  width: 81%;
+  border: 0;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  padding-left: 22px;
+  font-family: "Inter";
+  font-weight: 400;
+  font-size: 16px;
+  box-shadow: 0px 0px 27px 2px rgba(0,0,0,0.45)  ;
+}
+
+.popup-input::placeholder{
+  font-family: "Inter";
+  font-weight: 400;
+  font-size: 16px;
+  
+} 
+
+
+
+.preview{
+  height: 43%;
+  width: 85%;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0px 0px 27px 2px rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview img{
+  height: 50%;
+  width: 50%;
+}
+
+.AddCity{
+  height: 12%;
+  width: 30%;
+  background-color: #365b7d;
+  border-radius: 17px ;
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 16px;
+  color: rgb(255, 255, 255);
+  border: 0;
+}
+
+.AddCity:hover{
+  transform: scale(1.1);
+  cursor: pointer;
 }
