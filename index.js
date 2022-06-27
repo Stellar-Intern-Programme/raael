@@ -12,3 +12,7 @@ function createImg(){
     div.appendChild(divP)
 
 }
+
+function openModal(){
+    
+}

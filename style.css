@@ -120,16 +120,15 @@ body {
 .Images {
   display: flex;
   align-items:top;
-  gap:60px;
-  width: 800px;
+  gap:30px;
+  width: auto;
   overflow-x: scroll;
   box-sizing: content-box;
   overflow-y: hidden;-ms-overflow-style: none; 
   scrollbar-width: none; 
   padding-block:20px;
-  /* padding-inline:20px; */
   padding-right: 30px;
-
+  padding-left:10px;
 }
 
 .Images img {
@@ -137,7 +136,7 @@ body {
   width: fit-content;
   height: 161px;
   border-radius: 20px;
-  /* gap:60px; */
+
 }
 
 .Poze:hover {
