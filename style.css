@@ -65,13 +65,36 @@ body {
 
 .Placeholder {
   display: flex;
-  background-color: white;
   width: 273px;
   height: 44px;
   border-radius: 10px;
   align-items: center;
   flex-direction: row;
   box-sizing:border-box;
+  border: 0;
+  background: transparent;
+  outline: none;
+}
+
+.wrapper{
+  display: flex;
+  position: relative;
+  padding: 0 0 0 40px;
+  background-color: white;
+  border-radius: 20px;
+}
+
+.wrapper img{
+  position: absolute;
+  align-self: center;
+  left: 10px;
+}
+
+.input::placeholder{
+  font-family: "Inter";
+  font-weight: 400;
+  font-size: 16px;
+  
 }
 
 .Placeholder p {
@@ -83,9 +106,6 @@ body {
   color: #d9d9d9;
 }
 
-.Placeholder:hover {
-  border: 1px solid #87b6e1;
-}
 
 .Placeholder img {
   padding-left: 25px;
