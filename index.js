@@ -51,21 +51,47 @@ function onInputChange(event){
   background.style.backgroundRepeat = `none`
 }
 
+const arrayOfCities=JSON.parse(localStorage.getItem("cities"))||[] 
 
-function createImg(){
+function addCities(){
+    const cityName=document.getElementById("city").value
+    const photoUrl=document.getElementById("url").value
+    arrayOfCities.push({name:cityName,url:photoUrl})
+   
+    localStorage.setItem("cities",JSON.stringify(arrayOfCities))
+    init()
+    
+}
+window.addEventListener('load', (event) => {
+    init()
+  });
+
+
+function init(){
+    const div=document.querySelector(".imgs")
+    div.innerHTML=""
+    arrayOfCities.forEach((city)=>{
+        console.log(city)
+        renderCities(city)
+    })
+}
+
+
+function renderCities(city){
     const div=document.querySelector(".imgs")
     const img=document.createElement("img")
     // <img>
-    img.setAttribute("src", document.getElementById("url").value)   
+    img.setAttribute("src", city.url)   
+    console.log(img)
     img.style.objectFit = `cover`
     const divP=document.createElement("div")
     divP.setAttribute("class","Poze")
     const p=document.createElement("p")
-    p.textContent = document.getElementById("city").value
+    p.textContent = city.cityName;
     p.setAttribute("class","City")
     divP.appendChild(img)
     divP.appendChild(p)
     div.appendChild(divP)
     console.log("aici")
-    closeModal()
+    closeModal() 
 }
