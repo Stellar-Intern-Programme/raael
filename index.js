@@ -51,7 +51,7 @@ function onInputChange(event){
   background.style.backgroundRepeat = `none`
 }
 
-const arrayOfCities=JSON.parse(localStorage.getItem("cities"))||[] 
+let arrayOfCities=JSON.parse(localStorage.getItem("cities"))||[] 
 
 function addCities(){
     const cityName=document.getElementById("city").value
@@ -74,7 +74,10 @@ function init(){
         console.log(city)
         renderCities(city)
     })
+    const pOras = document.getElementById("Oras")
+    pOras.innerHTML = arrayOfCities[0].name
 }
+
 
 
 function renderCities(city){
@@ -86,8 +89,9 @@ function renderCities(city){
     img.style.objectFit = `cover`
     const divP=document.createElement("div")
     divP.setAttribute("class","Poze")
+    divP.onclick = () => LMAO_XD(city)
     const p=document.createElement("p")
-    p.textContent = city.cityName;
+    p.textContent = city.name;
     p.setAttribute("class","City")
     divP.appendChild(img)
     divP.appendChild(p)
@@ -95,3 +99,24 @@ function renderCities(city){
     console.log("aici")
     closeModal() 
 }
+
+function LMAO_XD(city){
+    selectedCity = city;
+    const pOras = document.getElementById("Oras")
+    pOras.innerHTML = city.name;
+    console.log(pOras)
+}
+
+function deleteCity(){
+  arrayOfCities = arrayOfCities.filter((city)=> {
+    console.log(city)
+    console.log(selectedCity)
+    return city.name !== selectedCity.name
+  })
+  localStorage.setItem("cities",JSON.stringify(arrayOfCities))
+
+  init()
+}
+
+let selectedCity = arrayOfCities[0];
+

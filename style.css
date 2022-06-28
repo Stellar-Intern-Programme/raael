@@ -168,6 +168,10 @@ body {
   flex-direction: column;
   align-items:center;
   gap:12px;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 130px;
+  text-overflow: ellipsis;
 }
 
 .Poze img{
@@ -474,6 +478,26 @@ width:fit-content;
   font-weight: 200;
   color: #d9d9d9;
 }
+
+.oras img{
+  width: 26px;
+  height: 26px;
+  transition: 0.5s ease-in-out;
+}
+
+.oras img:hover{
+  transform: scale(1.21);
+  cursor: pointer;
+
+}
+
+.oras{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
 .oras_over {
   display: flex;
   justify-content: center;
