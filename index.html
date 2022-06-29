@@ -41,17 +41,31 @@
   right: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 4;
-  
-  
+  z-index: 4;  
 }
+
+.suggestions{
+  display: none;
+  z-index: 3;
+  position: absolute;
+  background-color: white;
+  height: 92px;
+  width: 312px;
+  top:32px;
+  right: 0px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+}
+
+
   </style>
 
   <body>
     <div class="overlay" onclick="closeModal()">
     </div>
 
-    <div class="background">
+    <div class="background" id="suggestionsOff">
       <div class="modal" id="modal">
         <input type="text" placeholder="City name"class="popup-input" id="city">
         <input type="url" placeholder="Potato.URL" class="popup-input" id="url">
@@ -61,16 +75,17 @@
         <input type="button" value="ADD CITY" class="AddCity" id="addCity" onclick="addCities()">
      </div>
 
-      <div class="main">
-        <div class="left">
+      <div class="main"  id="suggestionsOff">
+        <div class="left"  id="suggestionsOff" >
           <div class="Nav">
             <!-- <div class="Placeholder">
               
               <p>Search new place</p>
             </div> -->
             <div class="wrapper">
-              <input type="text" placeholder="Search new place" class="Placeholder">
-              <img src="resurse/Vector.svg" alt="Lupa" class="Lupa" />
+              <input id="search" type="text" placeholder="Search new place" class="Placeholder" onclick = "suggestions()">
+              <div class="suggestions" id="suggestions"></div>
+              <img src="resurse/Vector.svg" alt="Lupa" class="Lupa"/>
             </div>
             
             <div class="AP">
@@ -242,7 +257,7 @@
             </table>
           </div>
         </div>
-        <div class="right">
+        <div class="right"  id="suggestionsOff" onclick="suggestionsOff()">
           <div class="profile">
             <div class="notif">
               <p class="text1">Notification</p>

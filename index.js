@@ -116,3 +116,13 @@ function deleteCity(){
 
 let selectedCity = arrayOfCities[0];
 
+// function suggestions(){
+//   const suggestions = document.getElementById("suggestions")
+//   suggestions.style.display="flex";
+// }
+
+// function suggestionsOff(){
+//   const suggestions = document.getElementById("suggestions")
+//   const suggestionsOff = document.getElementById("suggestionsOff")
+//   suggestions.style.display="none";
+// }
