@@ -115,14 +115,16 @@ function deleteCity(){
 }
 
 let selectedCity = arrayOfCities[0];
+function regenerate(event){
+  if(event.value==="")
+  init()
+}
 
-// function suggestions(){
-//   const suggestions = document.getElementById("suggestions")
-//   suggestions.style.display="flex";
-// }
+function search(event){
+  const imgs=document.getElementsByClassName("imgs")[0]
+searchArray = arrayOfCities.filter(e => e.name.toLowerCase().includes(event.value))
+imgs.innerHTML=""
+searchArray.forEach(e=>renderCities(e))
+regenerate(event)
+}
 
-// function suggestionsOff(){
-//   const suggestions = document.getElementById("suggestions")
-//   const suggestionsOff = document.getElementById("suggestionsOff")
-//   suggestions.style.display="none";
-// }
