@@ -71,7 +71,6 @@ function init(){
     const div=document.querySelector(".imgs")
     div.innerHTML=""
     arrayOfCities.forEach((city)=>{
-        console.log(city)
         renderCities(city)
     })
     const pOras = document.getElementById("Oras")
@@ -85,7 +84,6 @@ function renderCities(city){
     const img=document.createElement("img")
     // <img>
     img.setAttribute("src", city.url)   
-    console.log(img)
     img.style.objectFit = `cover`
     const divP=document.createElement("div")
     divP.setAttribute("class","Poze")
@@ -96,7 +94,6 @@ function renderCities(city){
     divP.appendChild(img)
     divP.appendChild(p)
     div.appendChild(divP)
-    console.log("aici")
     closeModal() 
 }
 
@@ -104,13 +101,12 @@ function LMAO_XD(city){
     selectedCity = city;
     const pOras = document.getElementById("Oras")
     pOras.innerHTML = city.name;
-    console.log(pOras)
+   
 }
 
 function deleteCity(){
   arrayOfCities = arrayOfCities.filter((city)=> {
-    console.log(city)
-    console.log(selectedCity)
+   
     return city.name !== selectedCity.name
   })
   localStorage.setItem("cities",JSON.stringify(arrayOfCities))
