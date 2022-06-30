@@ -18,8 +18,10 @@
 let weather;
 fetch("./weather.json")
   .then((res) => res.json())
-  .then((data) => (weather = data));
-renderWeather;
+  .then((data) => {
+    weather = data
+    renderWeather();
+  });
 
 function openModal() {
   const modal = document.querySelector(".modal");
@@ -70,7 +72,6 @@ function addCities() {
 }
 window.addEventListener("load", (event) => {
   init();
-  renderWeather();
 });
 
 function init() {
@@ -131,9 +132,9 @@ function search(event) {
   regenerate(event);
 }
 function renderWeather() {
+  
   Object.keys(weather).forEach((item) => {
     const p = document.createElement("p");
-
     const divP = document.querySelector(".Buttons");
     p.textContent = item;
 
@@ -146,12 +147,35 @@ function renderWeather() {
       {
         children[i].className="Buttons"
       }
-      console.log(divP)
+
       p.classList="Buttons active"
-      renderWeatherData(item)});
+      renderWeatherData(item)
+    });
       
   });
 }
 function renderWeatherData(click){
+  console.log(click)
+  const data = weather[click]
+  console.log(data)
+  const table=document.getElementsByClassName("Table")[0]
+  table.innerHTML=""
+  for(let i=0; i<data.length;i++){
+  const tr=document.createElement("tr")
+  const tdzi=document.createElement("td")
+  const tdpic=document.createElement("td")
+  const tdnor=document.createElement("td")
+  const tdminmax=document.createElement("td")
+  tdzi.innerHTML=data[i].day
+  tdpic.innerHTML=`<img src="resurse/Picatura.svg" alt="Picatura" />  ${data[i].rainChance}%` 
+  tdnor.innerHTML=`<img src="resurse/Fulger.svg" alt="Fulger" />`
+  tdminmax.innerHTML=`${data[i].minDegrees}<div class="Rectangle"><div class="Rectangle2"></div></div> ${data[i].maxDegrees}`
+  tr.appendChild(tdzi)
+  tr.appendChild(tdpic)
+  tr.appendChild(tdnor)
+  tr.appendChild(tdminmax)
+  console.log(tr)
+  table.appendChild(tr)
 
+  }
 }
