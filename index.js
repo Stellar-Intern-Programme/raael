@@ -152,6 +152,6 @@ function renderWeather() {
       
   });
 }
-function renderWeatherData(){
+function renderWeatherData(click){
 
 }

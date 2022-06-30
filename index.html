@@ -21,7 +21,7 @@
     <div class="overlay" onclick="closeModal()">
     </div>
 
-    <div class="background">
+    <div class="background" id="suggestionsOff">
       <div class="modal" id="modal">
         <input type="text" placeholder="City name"class="popup-input" id="city">
         <input type="url" placeholder="Potato.URL" class="popup-input" id="url">
@@ -31,8 +31,8 @@
         <input type="button" value="ADD CITY" class="AddCity" id="addCity" onclick="addCities()">
      </div>
 
-      <div class="main">
-        <div class="left">
+      <div class="main"  id="suggestionsOff">
+        <div class="left"  id="suggestionsOff" >
           <div class="Nav">
             <!-- <div class="Placeholder">
               
@@ -210,7 +210,7 @@
             </table>
           </div>
         </div>
-        <div class="right">
+        <div class="right"  id="suggestionsOff" onclick="suggestionsOff()">
           <div class="profile">
             <div class="notif">
               <p class="text1">Notification</p>
