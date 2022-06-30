@@ -258,7 +258,7 @@ body {
   cursor: pointer;
 }
 
-.Buttons p:nth-of-type(1) {
+.Buttons .active {
   color: black;
   font-weight: 700;
 }
@@ -644,7 +644,35 @@ width:fit-content;
   display: flex;
   border-radius: 8px;
 }
-
+.overlay{
+  position: fixed;
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 4;
+  
+  
+}
+.modal {
+  width: 22vw;
+  height: 38vh;
+  position: absolute;
+  display: none;
+  margin: 0;
+  background-color: #F1FCFF;
+  z-index: 5;
+  border-radius: 3%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  
+}
 .line:hover {
   transition: 0.3s;
   background-color: yellow;
@@ -757,6 +785,14 @@ padding-bottom:40px;
 .WF p:nth-of-type(1) {
   margin:0;
   padding-top: 20px;
+
+}
+.modal{
+  width: 90%;
+  max-height: 80%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
 }
 
 }
