@@ -266,11 +266,15 @@ body {
   color: #EA3B3B;
 }
 
-/* .Table td{
-padding:0px;
-width:fit-content;
-
-} */
+ .Table td{
+  flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+    max-width: 100%;
+    overflow: hidden;
+}
 
 .Table {
   font-family: "Inter";
