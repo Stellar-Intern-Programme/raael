@@ -49,25 +49,47 @@
   z-index: 3;
   position: absolute;
   background-color: white;
-  height: 92px;
-  width: 312px;
-  top:32px;
+
+  width: 100%;
+  top:100%;
   right: 0px;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+flex-direction:column;
+max-height: 313px;
+align-items: center;
+height: fixed;
+}
 
+.suggestions p{
+  border-top: solid 1px;
+  margin:0px;
+  width: 95%;
+  text-align:center;
+  padding-bottom: 10px;
+  padding-top:10px;
+  display: flex;
+  justify-content:center;
+}
+
+.suggestions p:hover{
+  transform: scale(1.2);
+  cursor: pointer;
+  width: 79%;
 }
 
 
   </style>
 
   <body>
+
+    <audio id="audio" src="https://www.epidemicsound.com/track/YHgXsMfF8E/"></audio>
     <div class="overlay" onclick="closeModal()">
     </div>
 
-    <div class="background" id="suggestionsOff">
+    <div class="background" id="suggestionsOff" onclick = "suggestionsOff()">
       <div class="modal" id="modal">
-        <input type="text" placeholder="City name"class="popup-input" id="city">
+        <input  type="text" placeholder="City name"class="popup-input" id="city">
         <input type="url" placeholder="Potato.URL" class="popup-input" id="url">
         <div class="preview" >
  
@@ -83,9 +105,12 @@
               <p>Search new place</p>
             </div> -->
             <div class="wrapper">
-              <input onkeyup="search(this)" 
-              type="text" placeholder="Search new place" class="Placeholder">
-              <img src="resurse/Vector.svg" alt="Lupa" class="Lupa" />
+              <input autocomplete="off" id="search"
+              type="text" placeholder="Search new place" class="Placeholder" onkeyup = "search(this)">
+              <img src="resurse/Vector.svg" alt="Lupa" class="Lupa" />  
+              <div class = "suggestions">
+
+              </div>
             </div>
             
             <div class="AP">
