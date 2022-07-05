@@ -11,11 +11,18 @@
 //     divP.appendChild(p)
 //     div.appendChild(divP)
 
-// }
-
 let searchInput;
 
 let index = 0;
+// import weather from"./weather.json" assert {type: "json"}
+
+let weather;
+fetch("./weather.json")
+  .then((res) => res.json())
+  .then((data) => {
+    weather = data;
+    renderWeather();
+  });
 
 function openModal() {
   const modal = document.querySelector(".modal");
@@ -29,8 +36,8 @@ function openModal() {
   defImage.className = "defImage";
   const preview = document.querySelector(".preview");
   preview.replaceChildren(defImage);
-  const audio = document.querySelector('#audio')
-  audio.play()
+  const audio = document.querySelector("#audio");
+  audio.play();
 }
 
 function closeModal() {
@@ -68,13 +75,15 @@ function addCities() {
 }
 window.addEventListener("load", () => {
   init();
+  renderWeatherData("Week")
   searchInput = document.getElementById("search");
   searchInput.addEventListener("keyup", suggestions);
 });
 
 function init(searchParam) {
-  const div = document.querySelector(".imgs");
 
+  const div = document.querySelector(".imgs");
+  
   div.innerHTML = "";
   arrayOfCities
     .filter((city) => {
@@ -84,6 +93,22 @@ function init(searchParam) {
     .forEach((city) => {
       renderCities(city);
     });
+  window.addEventListener("load", (event) => {
+    init();
+  });
+  
+
+  
+
+}
+
+function init() {
+  
+  const div = document.querySelector(".imgs");
+  div.innerHTML = "";
+  arrayOfCities.forEach((city) => {
+    renderCities(city);
+  });
   const pOras = document.getElementById("Oras");
   pOras.innerHTML = arrayOfCities[0].name;
 }
@@ -136,6 +161,42 @@ function search(event) {
   regenerate(event);
 }
 
+function renderWeather() {
+  Object.keys(weather).forEach((item , key) => {
+
+    const p = document.createElement("p");
+    const divP = document.querySelector(".Buttons");
+    p.textContent = item;
+    p.setAttribute("class", "Buttons");
+    if(key === 0){
+      p.classList ="Buttons active"
+    }
+    
+    divP.appendChild(p);
+    p.addEventListener("click", () => {
+      const children = divP.children;
+      for (let i = 0; i < children.length; i++) {
+        children[i].className = "Buttons";
+      }
+
+      p.classList = "Buttons active";
+      renderWeatherData(item);
+    });
+  });
+}
+
+window.addEventListener("keyup", logKey);
+
+
+function logKey(ev) {
+  if (ev.keyCode === 40) index++;
+
+  if (ev.keyCode === 38) index--;
+  suggestions();
+}
+
+
+
 function suggestions() {
   const input = document.querySelector(".Placeholder");
 
@@ -148,11 +209,11 @@ function suggestions() {
   const suggestionsArray = arrayOfCities.filter((city) =>
     city.name.toLowerCase().includes(value)
   );
-  suggestionsArray.forEach((suggestions,i) => {
+  suggestionsArray.forEach((suggestions, i) => {
     const pSuggestions = document.createElement("p");
     pSuggestions.innerHTML = suggestions.name;
-    if(i===index){
-      pSuggestions.style.background = "blue"
+    if (i === index) {
+      pSuggestions.style.background = "blue";
     }
     divSuggestions.appendChild(pSuggestions);
     divSuggestions.style.display = "flex";
@@ -174,6 +235,8 @@ function suggestions() {
   }
 }
 
+
+
 function suggestionsOff() {
   const divSuggestions = document.querySelector(".suggestions");
   const wrapper = document.querySelector(".wrapper");
@@ -182,16 +245,47 @@ function suggestionsOff() {
   index = 0;
 }
 
-window.addEventListener("keyup", logKey);
+function renderWeatherData(click) {
+  console.log(click);
+  const data = weather[click];
+  console.log(data);
+  const table = document.getElementsByClassName("Table")[0];
+  table.innerHTML = "";
+  for (let i = 0; i < data.length; i++) {
+    const tr = document.createElement("tr");
+    const tdzi = document.createElement("td");
+    const tdpic = document.createElement("td");
+    const tdnor = document.createElement("td");
+    const tdminmax = document.createElement("td");
+    tdzi.innerHTML = data[i].day;
+    tdpic.innerHTML = `<img src="resurse/Picatura.svg" alt="Picatura" />  ${data[i].rainChance}%`;
+    tdnor.innerHTML = `<img src="resurse/Fulger.svg" alt="Fulger" />`;
+    tdminmax.innerHTML = `${data[i].minDegrees}<div class="Rectangle"><div class="Rectangle2"></div></div> ${data[i].maxDegrees}`;
+    tr.appendChild(tdzi);
+    tr.appendChild(tdpic);
+    tr.appendChild(tdnor);
+    tr.appendChild(tdminmax);
+    console.log(tr);
+    table.appendChild(tr);
+  }
+}
 
-// function selectSuggestion(){
-//   const
-// }
+function amongUsPopUp() {
+  const sus = document.getElementById("susLmao");
+  sus.style.display = "flex";
+  setTimeout(hideAmongUsPopUp, 1900) 
+}
 
-function logKey(ev) {
-  if (ev.keyCode === 40) index++;
+
+
+function hideAmongUsPopUp(){
+  const sus = document.getElementById("susLmao");
+  sus.style.display = "none";
+}
+
+const API_KEY = "6a46d8f38913f1e370228f934ad28c03"
+
+function search() {
+  fetch("https://api.openweathermap.org/data/2.5/weather?q=Iasi&APPID=" + API_KEY).then(res => res.json()).then(data => console.log(data))
   
-  if(ev.keyCode === 38) index--;
-  // if(ev.keyCode === 13)
-  suggestions()
 }

@@ -38,6 +38,7 @@ body {
   border-radius: 50px;
   width: 1395px;
   height: 753px;
+  position:relative;
 }
 .right {
   position: relative;
@@ -247,6 +248,7 @@ body {
   font-weight: 700;
   color: #acacac;
   margin: 0px;
+  margin-top: 9px;
 }
 
 .Buttons p{
@@ -258,7 +260,7 @@ body {
   cursor: pointer;
 }
 
-.Buttons p:nth-of-type(1) {
+.Buttons .active {
   color: black;
   font-weight: 700;
 }
@@ -279,6 +281,8 @@ width:fit-content;
   max-height: 262px;
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
+  padding-right: 15px;
 }
 
 .Table tr {
@@ -293,6 +297,7 @@ width:fit-content;
 .Table td {
   flex: 1;
   display: flex;
+  flex-direction: row;
 }
 
 .Picatura {
@@ -305,6 +310,7 @@ width:fit-content;
   height: 9px;
   background: #d9d9d9;
   border-radius: 20px;
+  padding-inline : 14px;
 }
 
 .Rectangle2 {
@@ -371,6 +377,11 @@ width:fit-content;
   margin: 0;
   width: 60px;
   height: 60px;
+}
+
+.pozabgd:hover{
+  transform: scale(1.1);
+  cursor: pointer;
 }
 
 .profile {
@@ -485,6 +496,7 @@ width:fit-content;
   font-size: 40px;
   margin-top: 20px;
 }
+
 .date {
   font-size: 12px;
   font-weight: 300;
@@ -644,7 +656,35 @@ width:fit-content;
   display: flex;
   border-radius: 8px;
 }
-
+.overlay{
+  position: fixed;
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 4;
+  
+  
+}
+.modal {
+  width: 22vw;
+  height: 38vh;
+  position: absolute;
+  display: none;
+  margin: 0;
+  background-color: #F1FCFF;
+  z-index: 5;
+  border-radius: 3%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  
+}
 .line:hover {
   transition: 0.3s;
   background-color: yellow;
@@ -757,6 +797,14 @@ padding-bottom:40px;
 .WF p:nth-of-type(1) {
   margin:0;
   padding-top: 20px;
+
+}
+.modal{
+  width: 90%;
+  max-height: 80%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
 }
 
 }

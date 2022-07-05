@@ -17,102 +17,135 @@
 
   <style>
     .modal {
-  width: 29vw;
-  height: 38vh;
-  position: absolute;
-  display: none;
-  margin: 0;
-  background-color: #F1FCFF;
-  z-index: 5;
-  border-radius: 3%;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-}
+      width: 29vw;
+      height: 38vh;
+      position: absolute;
+      display: none;
+      margin: 0;
+      background-color: #f1fcff;
+      z-index: 5;
+      border-radius: 3%;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
 
-.overlay{
-  position: fixed;
-  display: none;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 4;  
-}
+    .overlay {
+      position: fixed;
+      display: none;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 4;
+    }
 
-.suggestions{
-  display: none;
-  z-index: 3;
-  position: absolute;
-  background-color: white;
+    .suggestions {
+      display: none;
+      z-index: 3;
+      position: absolute;
+      background-color: white;
 
-  width: 100%;
-  top:100%;
-  right: 0px;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-flex-direction:column;
-max-height: 313px;
-align-items: center;
-height: fixed;
-}
+      width: 100%;
+      top: 100%;
+      right: 0px;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      flex-direction: column;
+      max-height: 313px;
+      align-items: center;
+      height: fixed;
+    }
 
-.suggestions p{
-  border-top: solid 1px;
-  margin:0px;
-  width: 95%;
-  text-align:center;
-  padding-bottom: 10px;
-  padding-top:10px;
-  display: flex;
-  justify-content:center;
-}
+    .suggestions p {
+      border-top: solid 1px;
+      margin: 0px;
+      width: 95%;
+      text-align: center;
+      padding-bottom: 10px;
+      padding-top: 10px;
+      display: flex;
+      justify-content: center;
+    }
 
-.suggestions p:hover{
-  transform: scale(1.2);
-  cursor: pointer;
-  width: 79%;
-}
+    .suggestions p:hover {
+      transform: scale(1.2);
+      cursor: pointer;
+      width: 79%;
+    }
 
-
+    .daadd {
+      height: 150px;
+      width: 120px;
+      position: absolute;
+      z-index: 5;
+     top: -94px;
+    right:4%;
+      display: none;
+    }
   </style>
 
   <body>
+    <audio
+      id="audio"
+      src="https://www.epidemicsound.com/track/YHgXsMfF8E/"
+    ></audio>
+    <div class="overlay" onclick="closeModal()"></div>
 
-    <audio id="audio" src="https://www.epidemicsound.com/track/YHgXsMfF8E/"></audio>
-    <div class="overlay" onclick="closeModal()">
-    </div>
+    
 
-    <div class="background" id="suggestionsOff" onclick = "suggestionsOff()">
+    <div class="background" id="suggestionsOff" onclick="suggestionsOff()">
       <div class="modal" id="modal">
-        <input  type="text" placeholder="City name"class="popup-input" id="city">
-        <input type="url" placeholder="Potato.URL" class="popup-input" id="url">
-        <div class="preview" >
- 
-        </div>
-        <input type="button" value="ADD CITY" class="AddCity" id="addCity" onclick="addCities()">
-     </div>
+      
+        <input
+          type="text"
+          placeholder="City name"
+          class="popup-input"
+          id="city"
+        />
+        <input
+          type="url"
+          placeholder="Potato.URL"
+          class="popup-input"
+          id="url"
+        />
+        <div class="preview"></div>
+        <input
+          type="button"
+          value="ADD CITY"
+          class="AddCity"
+          id="addCity"
+          onclick="addCities()"
+        />
+      </div>
 
-      <div class="main"  id="suggestionsOff">
-        <div class="left"  id="suggestionsOff" >
+      <div class="main" id="suggestionsOff">
+  
+          <img id="susLmao" class="daadd" src="resurse/giphy.gif" />
+    
+          <div class="left" id="suggestionsOff">
           <div class="Nav">
             <!-- <div class="Placeholder">
               
               <p>Search new place</p>
             </div> -->
             <div class="wrapper">
-              <input autocomplete="off" id="search"
-              type="text" placeholder="Search new place" class="Placeholder" onkeyup = "search(this)">
-              <img src="resurse/Vector.svg" alt="Lupa" class="Lupa" />  
-              <div class = "suggestions">
-
-              </div>
+              <input
+                autocomplete="off"
+                id="search"
+                type="text"
+                placeholder="Search new place"
+                class="Placeholder"
+                onkeyup="search(this)"
+              />
+              <img src="resurse/Vector.svg" alt="Lupa" class="Lupa" />
+              <div class="suggestions"></div>
             </div>
-            
+
             <div class="AP">
               <p>All places</p>
               <img src="resurse/sageata.svg" alt="Sageata" />
@@ -125,12 +158,7 @@ height: fixed;
             </div>
 
             <div class="Images">
-              <div class="imgs" style="display: flex; gap: 25px">
-                
-                
-                
-                
-              </div>
+              <div class="imgs" style="display: flex; gap: 25px"></div>
               <div onclick="openModal()" class="Plus">
                 <svg
                   width="28"
@@ -150,21 +178,18 @@ height: fixed;
             </div>
           </div>
 
-          <div class="Buttons">
-            <p class="Week">Week</p>
-            <p>Month</p>
-            <p>3 Months</p>
-            <p>6 Months</p>
-          </div>
+          <div class="Buttons"></div>
 
           <div class="Table">
-            <table>
+            <!-- <table>
               <tr>
                 <td>Monday</td>
+                
                 <td class="Picatura">
                   <img src="resurse/Picatura.svg" alt="Picatura" />
                   50%
                 </td>
+
                 <td>
                   <img src="resurse/Fulger.svg" alt="Fulger" />
                 </td>
@@ -176,113 +201,11 @@ height: fixed;
                   26°C
                 </td>
               </tr>
-              <tr>
-                <td>Tuesday</td>
-                <td>
-                  <img src="resurse/Picatura.svg" alt="Picatura" />
-                  50%
-                </td>
-                <td>
-                  <img src="resurse/Fulger.svg" alt="Fulger" />
-                </td>
-
-                <td class="grade">
-                  17°C
-                  <div class="Rectangle"><div class="Rectangle2"></div></div>
-
-                  26°C
-                </td>
-              </tr>
-              <tr>
-                <td>Wednesday</td>
-                <td>
-                  <img src="resurse/Picatura.svg" alt="Picatura" />
-                  50%
-                </td>
-                <td>
-                  <img src="resurse/Fulger.svg" alt="Fulger" />
-                </td>
-
-                <td class="grade">
-                  17°C
-                  <div class="Rectangle"><div class="Rectangle2"></div></div>
-
-                  26°C
-                </td>
-              </tr>
-              <tr>
-                <td>Thursday</td>
-                <td>
-                  <img src="resurse/Picatura.svg" alt="Picatura" />
-                  50%
-                </td>
-                <td>
-                  <img src="resurse/Fulger.svg" alt="Fulger" />
-                </td>
-
-                <td class="grade">
-                  17°C
-                  <div class="Rectangle"><div class="Rectangle2"></div></div>
-
-                  26°C
-                </td>
-              </tr>
-              <tr>
-                <td>Friday</td>
-                <td>
-                  <img src="resurse/Picatura.svg" alt="Picatura" />
-                  50%
-                </td>
-                <td>
-                  <img src="resurse/Fulger.svg" alt="Fulger" />
-                </td>
-
-                <td class="grade">
-                  17°C
-                  <div class="Rectangle"><div class="Rectangle2"></div></div>
-
-                  26°C
-                </td>
-              </tr>
-              <tr>
-                <td>Saturday</td>
-                <td>
-                  <img src="resurse/Picatura.svg" alt="Picatura" />
-                  50%
-                </td>
-                <td>
-                  <img src="resurse/Fulger.svg" alt="Fulger" />
-                </td>
-
-                <td class="grade">
-                  17°C
-                  <div class="Rectangle"><div class="Rectangle2"></div></div>
-
-                  26°C
-                </td>
-              </tr>
-              <tr>
-                <td>Sunday</td>
-                <td>
-                  <img src="resurse/Picatura.svg" alt="Picatura" />
-                  50%
-                </td>
-                <td>
-                  <img src="resurse/Fulger.svg" alt="Fulger" />
-                </td>
-
-                <td class="grade">
-                  17°C
-                  <div class="Rectangle">
-                    <div class="Rectangle2"></div>
-                  </div>
-                  26°C
-                </td>
-              </tr>
-            </table>
+              
+            </table> -->
           </div>
         </div>
-        <div class="right"  id="suggestionsOff" onclick="suggestionsOff()">
+        <div class="right" id="suggestionsOff">
           <div class="profile">
             <div class="notif">
               <p class="text1">Notification</p>
@@ -290,10 +213,10 @@ height: fixed;
             </div>
 
             <p class="text3">Places</p>
-            <img src="resurse/bogddan.png" alt="Bogdan" class="pozabgd" />
+            <img src="resurse/bogddan.png" alt="Bogdan" class="pozabgd" onclick="amongUsPopUp()"/>
           </div>
           <div class="nor2">
-            <img src="resurse/NOR.svg" alt="nori" />
+            <img  src="resurse/NOR.svg" alt="nori" />
           </div>
           <div class="nor1">
             <img src="resurse/nor_1.svg" alt="nori" />
@@ -320,7 +243,12 @@ height: fixed;
             <div class="oras_over">
               <div class="oras">
                 <p id="Oras"></p>
-                <img src="resurse/bin.svg" alt="Garbage" id="delete" onclick="deleteCity()" >
+                <img
+                  src="resurse/bin.svg"
+                  alt="Garbage"
+                  id="delete"
+                  onclick="deleteCity()"
+                />
               </div>
             </div>
             <div class="info">
