@@ -75,15 +75,14 @@ function addCities() {
 }
 window.addEventListener("load", () => {
   init();
-  renderWeatherData("Week")
+  renderWeatherData(Object.keys(weather)[0]);
   searchInput = document.getElementById("search");
-  searchInput.addEventListener("keyup", suggestions);
+  // searchInput.addEventListener("keyup", suggestions);
 });
 
 function init(searchParam) {
-
   const div = document.querySelector(".imgs");
-  
+
   div.innerHTML = "";
   arrayOfCities
     .filter((city) => {
@@ -99,7 +98,6 @@ function init(searchParam) {
 }
 
 function init() {
-  
   const div = document.querySelector(".imgs");
   div.innerHTML = "";
   arrayOfCities.forEach((city) => {
@@ -147,7 +145,7 @@ function regenerate(event) {
   if (event.value === "") init();
 }
 
-function search(event) {
+function searchinline(event) {
   const imgs = document.getElementsByClassName("imgs")[0];
   searchArray = arrayOfCities.filter((e) =>
     e.name.toLowerCase().includes(event.value)
@@ -158,16 +156,15 @@ function search(event) {
 }
 
 function renderWeather() {
-  Object.keys(weather).forEach((item , key) => {
-
+  Object.keys(weather).forEach((item, key) => {
     const p = document.createElement("p");
     const divP = document.querySelector(".Buttons");
     p.textContent = item;
     p.setAttribute("class", "Buttons");
-    if(key === 0){
-      p.classList ="Buttons active"
+    if (key === 0) {
+      p.classList = "Buttons active";
     }
-    
+
     divP.appendChild(p);
     p.addEventListener("click", () => {
       const children = divP.children;
@@ -180,35 +177,28 @@ function renderWeather() {
     });
   });
 }
- 
+
 window.addEventListener("keyup", logKey);
 
 function logKey(ev) {
-  if (ev.keyCode === 40) index++;
+  // if (ev.keyCode === 40) index++;
 
-  if (ev.keyCode === 38) index--;
-  suggestions();
+  // if (ev.keyCode === 38) index--;
+  // suggestions();
+  if (ev.keyCode === 13) search();
 }
 
-
-
-function suggestions() {
-  const input = document.querySelector(".Placeholder");
-
-  const value = input.value;
-  console.log(value);
+function suggestions(data) {
   const divSuggestions = document.querySelector(".suggestions");
   const wrapper = document.querySelector(".wrapper");
   divSuggestions.innerHTML = "";
 
-  const suggestionsArray = arrayOfCities.filter((city) =>
-    city.name.toLowerCase().includes(value)
-  );
+  const suggestionsArray = data.list
   suggestionsArray.forEach((suggestions, i) => {
     const pSuggestions = document.createElement("p");
     pSuggestions.innerHTML = suggestions.name;
     if (i === index) {
-      pSuggestions.style.background = "blue";
+      pSuggestions.style.background = "gray";
     }
     divSuggestions.appendChild(pSuggestions);
     divSuggestions.style.display = "flex";
@@ -216,21 +206,20 @@ function suggestions() {
     wrapper.style.borderTopRightRadius = "20px";
     wrapper.style.borderTopLeftRadius = "20px";
 
-    pSuggestions.onclick = function da() {
-      // searchArray = arrayOfCities.filter(e => e.name.toLowerCase().includes(pSuggestions.innerHTML))
-      input.value = suggestions.name;
-      init(suggestions.name);
-      // searchArray.forEach(e=>renderCities(e))
-      // regenerate(ev)
-    };
+    // pSuggestions.onclick = function da() {
+    //   // searchArray = arrayOfCities.filter(e => e.name.toLowerCase().includes(pSuggestions.innerHTML))
+    //   input.value = suggestions.name;
+    //   init(suggestions.name);
+    //   // searchArray.forEach(e=>renderCities(e))
+    //   // regenerate(ev)
+    // };
+    pSuggestions.onclick=() =>onecall(suggestions)
   });
   if (value == "") {
     divSuggestions.style.display = "none";
     wrapper.style.borderRadius = "20px";
   }
 }
-
-
 
 function suggestionsOff() {
   const divSuggestions = document.querySelector(".suggestions");
@@ -241,64 +230,80 @@ function suggestionsOff() {
 }
 
 function renderWeatherData(click) {
-  const data = weather[click]
-  console.log(data)
-  const table=document.getElementsByClassName("Table")[0]
-  table.innerHTML=""
-  for(let i=0; i<data.length;i++){
-  const tr=document.createElement("tr")
-  const tdzi=document.createElement("td")
-  const tdpic=document.createElement("td")
-  const tdnor=document.createElement("td")
-  const tdminmax=document.createElement("td")
-  const ppic=document.createElement("p")
-  const imgpic=document.createElement("img")
-  const imgnor=document.createElement("img")
-  const pmin=document.createElement("p")
-  const pmax=document.createElement("p")
-  const div1=document.createElement("div")
-  const div2=document.createElement("div")
-  tdzi.innerHTML=data[i].day
-  ppic.innerText=data[i].rainChance+"%"
-  imgpic.setAttribute("src","resurse/Picatura.svg")
-  tdpic.appendChild(imgpic)
-  tdpic.appendChild(ppic)
-  imgnor.setAttribute("src","resurse/Fulger.svg")
-  tdnor.appendChild(imgnor)
-  tdminmax.innerHTML=`${data[i].minDegrees}<div class="Rectangle"><div class="Rectangle2"></div></div> ${data[i].maxDegrees}`
-  // pmin.innerText=data[i].minDegrees
-  // pmax.innerText=data[i].maxDegrees
-  // div1.setAttribute("class","Rectangle")
-  // div2.setAttribute("class","Rectangle2")
-  // div1.appendChild(div2)
-  // tdminmax.appendChild(pmin)
-  // tdminmax.appendChild(div2)
-  // tdminmax.appendChild(pmax)
-  tr.appendChild(tdzi)
-  tr.appendChild(tdpic)
-  tr.appendChild(tdnor)
-  tr.appendChild(tdminmax)
-  console.log(tr)
-  table.appendChild(tr)
+  const data = weather[click];
+  console.log(data);
+  const table = document.getElementsByClassName("Table")[0];
+  table.innerHTML = "";
+  for (let i = 0; i < data.length; i++) {
+    const tr = document.createElement("tr");
+    const tdzi = document.createElement("td");
+    const tdpic = document.createElement("td");
+    const tdnor = document.createElement("td");
+    const tdminmax = document.createElement("td");
+    const ppic = document.createElement("p");
+    const imgpic = document.createElement("img");
+    const imgnor = document.createElement("img");
+    const pmin = document.createElement("p");
+    const pmax = document.createElement("p");
+    const div1 = document.createElement("div");
+    const div2 = document.createElement("div");
+    tdzi.innerHTML = data[i].day;
+    ppic.innerText = data[i].rainChance + "%";
+    imgpic.setAttribute("src", "resurse/Picatura.svg");
+    tdpic.appendChild(imgpic);
+    tdpic.appendChild(ppic);
+    imgnor.setAttribute("src", "resurse/Fulger.svg");
+    tdnor.appendChild(imgnor);
+    // tdminmax.innerHTML=`${data[i].minDegrees}<div class="Rectangle"><div class="Rectangle2"></div></div> ${data[i].maxDegrees}`
+    pmin.innerText = data[i].minDegrees;
+    pmax.innerText = data[i].maxDegrees;
+    div1.setAttribute("class", "Rectangle");
+    div2.setAttribute("class", "Rectangle2");
+    div1.appendChild(div2);
+    tdminmax.appendChild(pmin);
+    tdminmax.appendChild(div1);
+    tdminmax.appendChild(pmax);
+    tr.appendChild(tdzi);
+    tr.appendChild(tdpic);
+    tr.appendChild(tdnor);
+    tr.appendChild(tdminmax);
+    console.log(tr);
+    table.appendChild(tr);
   }
 }
 
 function amongUsPopUp() {
   const sus = document.getElementById("susLmao");
   sus.style.display = "flex";
-  setTimeout(hideAmongUsPopUp, 1900) 
+  setTimeout(hideAmongUsPopUp, 1900);
 }
 
-
-
-function hideAmongUsPopUp(){
+function hideAmongUsPopUp() {
   const sus = document.getElementById("susLmao");
   sus.style.display = "none";
 }
 
-const API_KEY = "6a46d8f38913f1e370228f934ad28c03"
+const API_KEY = "6a46d8f38913f1e370228f934ad28c03";
 
 function search() {
-  fetch("https://api.openweathermap.org/data/2.5/weather?q=Iasi&APPID=" + API_KEY).then(res => res.json()).then(data => console.log(data))
-  
+const value=document.getElementById("search").value
+
+    fetch(
+      "https://api.openweathermap.org/data/2.5/find?q="+value+"&APPID=" + API_KEY
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        suggestions(data)
+      });
+
+}
+function onecall(suggestions){
+
+  fetch(
+    "https://api.openweathermap.org/data/2.5/onecall?lat="+suggestions.coord.lat + "&lon="+ suggestions.coord.lon+"&APPID=" + API_KEY 
+  )
+  .then((res) => res.json())
+  .then((data) => {
+    console.log(data)
+  });
 }
