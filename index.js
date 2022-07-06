@@ -266,14 +266,6 @@ function renderWeatherData(click) {
   imgnor.setAttribute("src","resurse/Fulger.svg")
   tdnor.appendChild(imgnor)
   tdminmax.innerHTML=`${data[i].minDegrees}<div class="Rectangle"><div class="Rectangle2"></div></div> ${data[i].maxDegrees}`
-  // pmin.innerText=data[i].minDegrees
-  // pmax.innerText=data[i].maxDegrees
-  // div1.setAttribute("class","Rectangle")
-  // div2.setAttribute("class","Rectangle2")
-  // div1.appendChild(div2)
-  // tdminmax.appendChild(pmin)
-  // tdminmax.appendChild(div2)
-  // tdminmax.appendChild(pmax)
   tr.appendChild(tdzi)
   tr.appendChild(tdpic)
   tr.appendChild(tdnor)
