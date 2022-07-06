@@ -315,12 +315,20 @@ let divGradeR=document.getElementById("grader")
   });
 }
 function clickOnCity(data){
+
   let divGradeR=document.querySelector(".gradeR")
   divGradeR.innerHTML=""
   let divGradeCelius=document.getElementById("celius")
   divGradeCelius.innerHTML="°C"
   console.log(data)
   divGradeR.innerText = Math.round( data.current.temp-273.15)
+  let psunset=document.getElementById("sunset/sunrise")
+  let dategol=new Date()
+  psunset.innerText=""
+  console.log(dategol.getHours())  
+  if(dategol.getHours() <new Date(data.current.sunrise).getHours() ){
+    psunset.innerText = "sunrise "+new Date(data.current.sunrise).getHours()+":"+new Date(data.current.sunrise).getMinutes()
+  }else psunset.innerText = "sunset "+new Date(data.current.sunset).getHours()+":"+new Date(data.current.sunset).getMinutes()
   const divSuggestions = document.querySelector(".suggestions");
   divSuggestions.innerHTML = "";
   const cityName = document.getElementById("search").value;
