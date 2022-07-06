@@ -309,14 +309,18 @@ function onecall(suggestions){
   });
 }
 
-function clickOnCity(){
+function clickOnCity(data){
   const divSuggestions = document.querySelector(".suggestions");
   divSuggestions.innerHTML = "";
   const cityName = document.getElementById("search").value;
   
+  let divGradeR=document.querySelector(".gradeR")
+  divGradeR.innerHTML=""
+  let divGradeCelius=document.getElementById("celius")
+  divGradeCelius.innerHTML="°C"
+  console.log(data)
+  divGradeR.innerText = Math.round( data.current.temp-273.15)
   arrayOfCities.push({ name: cityName });
-
   localStorage.setItem("cities", JSON.stringify(arrayOfCities));
   init();
-  
 }
