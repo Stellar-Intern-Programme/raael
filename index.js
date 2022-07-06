@@ -321,6 +321,4 @@ function clickOnCity(data){
   divGradeCelius.innerHTML="°C"
   console.log(data)
   divGradeR.innerText = Math.round( data.current.temp-273.15)
-  
-
 }
