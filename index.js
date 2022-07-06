@@ -298,12 +298,29 @@ const value=document.getElementById("search").value
 
 }
 function onecall(suggestions){
-
+const load=document.getElementById("load")
+load.classList.add("loadVisible")
+let divGradeR=document.getElementById("grader")
+  divGradeR.innerHTML=""
+  let divGradeCelius=document.getElementById("celius")
+  divGradeCelius.innerHTML=""
   fetch(
     "https://api.openweathermap.org/data/2.5/onecall?lat="+suggestions.coord.lat + "&lon="+ suggestions.coord.lon+"&APPID=" + API_KEY 
   )
   .then((res) => res.json())
   .then((data) => {
     console.log(data)
+    clickOnCity(data)
+    load.classList.remove("loadVisible")
   });
+}
+function clickOnCity(data){
+  let divGradeR=document.querySelector(".gradeR")
+  divGradeR.innerHTML=""
+  let divGradeCelius=document.getElementById("celius")
+  divGradeCelius.innerHTML="°C"
+  console.log(data)
+  divGradeR.innerText = Math.round( data.current.temp-273.15)
+  
+
 }

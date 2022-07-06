@@ -862,9 +862,16 @@ padding-bottom:40px;
   font-size: 16px;
   color: rgb(255, 255, 255);
   border: 0;
-}
-
-.AddCity:hover{
+}.AddCity:hover{
   transform: scale(1.1);
   cursor: pointer;
+}.load{
+width: 80px;
+height: 80px;
+margin-top: 30px;
+margin-bottom: 30px;
+display: none;
+}
+.loadVisible{
+  display: block;
 }
