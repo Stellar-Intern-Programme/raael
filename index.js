@@ -115,7 +115,7 @@ function renderCities(city) {
   img.style.objectFit = `cover`;
   const divP = document.createElement("div");
   divP.setAttribute("class", "Poze");
-  divP.onclick = () => LMAO_XD(city);
+  divP.onclick = () => changeData(city);
   const p = document.createElement("p");
   p.textContent = city.name;
   p.setAttribute("class", "City");
@@ -125,11 +125,13 @@ function renderCities(city) {
   closeModal();
 }
 
-function LMAO_XD(city) {
+function changeData(city) {
+  console.log(city)
   selectedCity = city;
   const pOras = document.getElementById("Oras");
   pOras.innerHTML = city.name;
-  clickOnCity()
+  let divGrader=document.getElementById("grader")
+   divGrader.innerHTML = city.grade
 }
 
 function deleteCity() {
@@ -206,20 +208,8 @@ function suggestions(data) {
     wrapper.style.borderRadius = "0px";
     wrapper.style.borderTopRightRadius = "20px";
     wrapper.style.borderTopLeftRadius = "20px";
-
-    // pSuggestions.onclick = function da() {
-    //   // searchArray = arrayOfCities.filter(e => e.name.toLowerCase().includes(pSuggestions.innerHTML))
-    //   input.value = suggestions.name;
-    //   init(suggestions.name);
-    //   // searchArray.forEach(e=>renderCities(e))
-    //   // regenerate(ev)
-    // };
     pSuggestions.onclick=() =>onecall(suggestions)
   });
-  if (value == "") {
-    divSuggestions.style.display = "none";
-    wrapper.style.borderRadius = "20px";
-  }
 }
 
 function suggestionsOff() {
@@ -303,6 +293,7 @@ const value=document.getElementById("search").value
 }
 
 function onecall(suggestions){
+
   const load=document.getElementById("load")
   load.classList.add("loadVisible") 
   let divGradeR=document.getElementById("grader")
@@ -310,7 +301,7 @@ function onecall(suggestions){
     let divGradeCelius=document.getElementById("celius")
     divGradeCelius.innerHTML=""
     fetch(
-      "https://api.openweathermap.org/data/2.5/onecall?lat=%22" +suggestions.coord.lat + "&lon=" + suggestions.coord.lon+ "&APPID=" + API_KEY 
+      "https://api.openweathermap.org/data/2.5/onecall?lat=" +suggestions.coord.lat + "&lon=" + suggestions.coord.lon + "&APPID=" + API_KEY 
     )
     .then((res) => res.json())
     .then((data) => {
@@ -319,21 +310,38 @@ function onecall(suggestions){
       load.classList.remove("loadVisible")
     });
   }
-  
-  function clickOnCity(data){
-  
-    let divGradeR=document.querySelector(".gradeR")
-    divGradeR.innerHTML=""
-    let divGradeCelius=document.getElementById("celius")
-    // divGradeCelius.innerHTML="°C"
-    console.log(data)
-    divGradeR.innerText = Math.round( data.current.temp-273.15)
-    const divSuggestions = document.querySelector(".suggestions");
-    divSuggestions.innerHTML = "";
-    const cityName = document.getElementById("search").value;
-  
-    arrayOfCities.push({ name: cityName });
-  
-    localStorage.setItem("cities", JSON.stringify(arrayOfCities));
-    init();
-  }
+
+function clickOnCity(data){
+
+  let divGradeR=document.querySelector(".gradeR")
+  divGradeR.innerHTML=""
+  let divGradeCelius=document.getElementById("celius")
+  divGradeCelius.innerHTML="°C"
+  divGradeR.innerText = Math.round( data.current.temp-273.15)
+  let psunset=document.getElementById("sunset/sunrise")
+  let dategol=new Date()
+  psunset.innerText=""
+  console.log(dategol.getHours())  
+  if(dategol.getHours() <new Date(data.current.sunrise).getHours() ){
+    psunset.innerText = "sunrise "+new Date(data.current.sunrise).getHours()+":"+new Date(data.current.sunrise).getMinutes()
+  }else psunset.innerText = "sunset "+new Date(data.current.sunset).getHours()+":"+new Date(data.current.sunset).getMinutes()
+  const divSuggestions = document.querySelector(".suggestions");
+  divSuggestions.innerHTML = "";
+  const cityName = document.getElementById("search").value;
+
+  arrayOfCities.push({ name: cityName, grade: Math.round( data.current.temp-273.15)});
+  localStorage.setItem("cities", JSON.stringify(arrayOfCities));
+  init();
+}
+
+
+const arrayOfImages = [
+  {name: 'iasi', image:''},
+  {name: 'bucuresti', image:''},
+  {name: 'cluj', image:''},
+  {name: 'chisinau', image:''}
+]
+
+// const addImage{
+//    const suggestions = document.getElementById('')
+// }
