@@ -11,6 +11,10 @@
 //     divP.appendChild(p)
 //     div.appendChild(divP)
 
+const weekDays = ['Sun', 'Mon', "Tue", "Wed","Thu", "Fri", "Sat"]
+const yearMonth = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
+
 let searchInput;
 
 let index = 0;
@@ -77,6 +81,8 @@ window.addEventListener("load", () => {
   init();
   renderWeatherData(Object.keys(weather)[0]);
   searchInput = document.getElementById("search");
+  let datele=document.getElementById("datele")
+  datele.innerText ="  "+weekDays[new Date().getDay()]+","+new Date().getDate()+yearMonth[new Date().getMonth()]
   // searchInput.addEventListener("keyup", suggestions);
 });
 
@@ -315,22 +321,35 @@ function clickOnCity(data){
 
   let divGradeR=document.querySelector(".gradeR")
   divGradeR.innerHTML=""
+
   let divGradeCelius=document.getElementById("celius")
   divGradeCelius.innerHTML="°C"
   divGradeR.innerText = Math.round( data.current.temp-273.15)
   let psunset=document.getElementById("sunset/sunrise")
   let dategol=new Date()
+
   psunset.innerText=""
   console.log(dategol.getHours())  
+
   if(dategol.getHours() <new Date(data.current.sunrise).getHours() ){
     psunset.innerText = "sunrise "+new Date(data.current.sunrise).getHours()+":"+new Date(data.current.sunrise).getMinutes()
-  }else psunset.innerText = "sunset "+new Date(data.current.sunset).getHours()+":"+new Date(data.current.sunset).getMinutes()
+
+  } else psunset.innerText = "sunset "+new Date(data.current.sunset).getHours()+":"+new Date(data.current.sunset).getMinutes()
+
+  let divSimt=document.querySelector(".simt")
+  divSimt.innerHTML=""
+  divSimt.innerText = "Feels like "+Math.round( data.current.feels_like-273.15)
+
+
+
   const divSuggestions = document.querySelector(".suggestions");
   divSuggestions.innerHTML = "";
+
   const cityName = document.getElementById("search").value;
 
   arrayOfCities.push({ name: cityName, grade: Math.round( data.current.temp-273.15)});
   localStorage.setItem("cities", JSON.stringify(arrayOfCities));
+
   init();
 }
 
