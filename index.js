@@ -11,6 +11,10 @@
 //     divP.appendChild(p)
 //     div.appendChild(divP)
 
+const weekDays = ['Sun', 'Mon', "Tue", "Wed","Thu", "Fri", "Sat"]
+const yearMonth = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
+
 let searchInput;
 
 let index = 0;
@@ -77,6 +81,8 @@ window.addEventListener("load", () => {
   init();
   renderWeatherData(Object.keys(weather)[0]);
   searchInput = document.getElementById("search");
+  let datele=document.getElementById("datele")
+  datele.innerText ="  "+weekDays[new Date().getDay()]+","+new Date().getDate()+yearMonth[new Date().getMonth()]
   // searchInput.addEventListener("keyup", suggestions);
 });
 
@@ -305,40 +311,45 @@ function onecall(suggestions){
   .then((res) => res.json())
   .then((data) => {
     console.log(data)
-    clickOnCity()
+    clickOnCity(data)
   });
 }
 
 function clickOnCity(data){
-<<<<<<< HEAD
-
-=======
-  const divSuggestions = document.querySelector(".suggestions");
-  divSuggestions.innerHTML = "";
-  const cityName = document.getElementById("search").value;
-  
->>>>>>> 2aca8b10c75d8eb3e24fc91797cf8fd2b15680d0
   let divGradeR=document.querySelector(".gradeR")
   divGradeR.innerHTML=""
+
   let divGradeCelius=document.getElementById("celius")
   divGradeCelius.innerHTML="°C"
+
   console.log(data)
+
   divGradeR.innerText = Math.round( data.current.temp-273.15)
-<<<<<<< HEAD
+
   let psunset=document.getElementById("sunset/sunrise")
   let dategol=new Date()
+
   psunset.innerText=""
   console.log(dategol.getHours())  
+
   if(dategol.getHours() <new Date(data.current.sunrise).getHours() ){
     psunset.innerText = "sunrise "+new Date(data.current.sunrise).getHours()+":"+new Date(data.current.sunrise).getMinutes()
-  }else psunset.innerText = "sunset "+new Date(data.current.sunset).getHours()+":"+new Date(data.current.sunset).getMinutes()
+
+  } else psunset.innerText = "sunset "+new Date(data.current.sunset).getHours()+":"+new Date(data.current.sunset).getMinutes()
+
+  let divSimt=document.querySelector(".simt")
+  divSimt.innerHTML=""
+  divSimt.innerText = "Feels like "+Math.round( data.current.feels_like-273.15)
+
+
+
   const divSuggestions = document.querySelector(".suggestions");
   divSuggestions.innerHTML = "";
+
   const cityName = document.getElementById("search").value;
 
-=======
->>>>>>> 2aca8b10c75d8eb3e24fc91797cf8fd2b15680d0
   arrayOfCities.push({ name: cityName });
   localStorage.setItem("cities", JSON.stringify(arrayOfCities));
+
   init();
 }
