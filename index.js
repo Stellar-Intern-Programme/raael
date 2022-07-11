@@ -11,9 +11,10 @@
 //     divP.appendChild(p)
 //     div.appendChild(divP)
 
-const weekDays = ['Sun', 'Mon', "Tue", "Wed","Thu", "Fri", "Sat"]
+const weekDays = ['Sunday', 'Monday', "Tuesday", "Wednesday","Thursday", "Friday", "Saturday"]
 const yearMonth = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
+let globalWeatherData
 
 let searchInput;
 
@@ -227,46 +228,232 @@ function suggestionsOff() {
 }
 
 function renderWeatherData(click) {
-  const data = weather[click];
-  console.log(data);
-  const table = document.getElementsByClassName("Table")[0];
-  table.innerHTML = "";
-  for (let i = 0; i < data.length; i++) {
-    const tr = document.createElement("tr");
-    const tdzi = document.createElement("td");
-    const tdpic = document.createElement("td");
-    const tdnor = document.createElement("td");
-    const tdminmax = document.createElement("td");
-    const ppic = document.createElement("p");
-    const imgpic = document.createElement("img");
-    const imgnor = document.createElement("img");
-    const pmin = document.createElement("p");
-    const pmax = document.createElement("p");
-    const div1 = document.createElement("div");
-    const div2 = document.createElement("div");
-    tdzi.innerHTML = data[i].day;
-    ppic.innerText = data[i].rainChance + "%";
-    imgpic.setAttribute("src", "resurse/Picatura.svg");
-    tdpic.appendChild(imgpic);
-    tdpic.appendChild(ppic);
-    imgnor.setAttribute("src", "resurse/Fulger.svg");
-    tdnor.appendChild(imgnor);
-    // tdminmax.innerHTML=`${data[i].minDegrees}<div class="Rectangle"><div class="Rectangle2"></div></div> ${data[i].maxDegrees}`
-    pmin.innerText = data[i].minDegrees;
-    pmax.innerText = data[i].maxDegrees;
-    div1.setAttribute("class", "Rectangle");
-    div2.setAttribute("class", "Rectangle2");
-    div1.appendChild(div2);
-    tdminmax.appendChild(pmin);
-    tdminmax.appendChild(div1);
-    tdminmax.appendChild(pmax);
-    tr.appendChild(tdzi);
-    tr.appendChild(tdpic);
-    tr.appendChild(tdnor);
-    tr.appendChild(tdminmax);
-    console.log(tr);
-    table.appendChild(tr);
+  let data
+  const date=weekDays[new Date().getDay()]
+  let dayNumber=new Date().getDay()
+  const days=[date]
+  for(let i=0;i<weekDays.length;i++)
+  {
+    if(dayNumber<6){
+      dayNumber++
+      days.push(weekDays[dayNumber])
+    } else{
+      dayNumber=0
+      days.push(weekDays[dayNumber])
+    }
   }
+
+  let hourNumber=new Date().getDay()
+  const hours=[]
+  for(let i=0;i<48;i++)
+  {
+    if(hourNumber<24){
+      hourNumber++
+      hours.push(hourNumber)
+    } else{
+      hourNumber=0
+      hours.push(hourNumber)
+    }
+  }
+  let minuteNumber=new Date().getDay()
+  const minutes=[]
+  for(let i=0;i<60;i++)
+  {
+    if(minuteNumber<60){
+      minuteNumber++
+      minutes.push(minuteNumber)
+    } else{
+      minuteNumber=0
+      minutes.push(minuteNumber)
+    }
+  }
+  switch(click){
+    case "Minutely":{
+      data=globalWeatherData.minutely
+      const table = document.getElementsByClassName("Table")[0];
+      table.innerHTML = "";
+      for (let i = 0; i < data.length; i++) {
+          const tr = document.createElement("tr");
+          const tdzi = document.createElement("td");
+          const tdpic = document.createElement("td");
+          const tdnor = document.createElement("td");
+          const tdminmax = document.createElement("td");
+          const ppic = document.createElement("p");
+          const imgpic = document.createElement("img");
+          const imgnor = document.createElement("img");
+          const pmin = document.createElement("p");
+          const pmax = document.createElement("p");
+          const div1 = document.createElement("div");
+          const div2 = document.createElement("div");
+          tdzi.innerHTML = minutes[i];
+          ppic.innerText = data[i].precipitation + "%";
+          imgpic.setAttribute("src", "resurse/Picatura.svg");
+          tdpic.appendChild(imgpic);
+          tdpic.appendChild(ppic);
+          imgnor.setAttribute("src", "resurse/Fulger.svg");
+          tdnor.appendChild(imgnor);
+          // tdminmax.innerHTML=`${data[i].minDegrees}<div class="Rectangle"><div class="Rectangle2"></div></div> ${data[i].maxDegrees}`
+          if(data[i].temp)
+          {
+            pmin.innerText = data[i].temp.min;
+            pmax.innerText = data[i].temp.max;
+            div1.setAttribute("class", "Rectangle");
+          div2.setAttribute("class", "Rectangle2");
+          div1.appendChild(div2); 
+          tdminmax.appendChild(pmin);
+          tdminmax.appendChild(div1);
+          tdminmax.appendChild(pmax);
+          }
+          
+          tr.appendChild(tdzi);
+          tr.appendChild(tdpic);
+          tr.appendChild(tdnor);
+          tr.appendChild(tdminmax);
+          console.log(tr);
+          table.appendChild(tr);
+      }
+      
+      break
+    }
+    case "Hourly":{
+      data=globalWeatherData.hourly
+      const table = document.getElementsByClassName("Table")[0];
+      table.innerHTML = "";
+      for (let i = 0; i < data.length; i++) {
+        const tr = document.createElement("tr");
+        const tdzi = document.createElement("td");
+        const tdpic = document.createElement("td");
+        const tdnor = document.createElement("td");
+        const tdminmax = document.createElement("td");
+        const ppic = document.createElement("p");
+        const imgpic = document.createElement("img");
+        const imgnor = document.createElement("img");
+        const pmin = document.createElement("p");
+        const pmax = document.createElement("p");
+        const div1 = document.createElement("div");
+        const div2 = document.createElement("div");
+        tdzi.innerHTML =hours[i] ;
+        ppic.innerText = data[i].humidity + "%";
+        imgpic.setAttribute("src", "resurse/Picatura.svg");
+        tdpic.appendChild(imgpic);
+        tdpic.appendChild(ppic);
+        imgnor.setAttribute("src", "resurse/Fulger.svg");
+        tdnor.appendChild(imgnor);
+        // tdminmax.innerHTML=`${data[i].minDegrees}<div class="Rectangle"><div class="Rectangle2"></div></div> ${data[i].maxDegrees}`
+        if(data[i].temp)
+          {
+            pmin.innerText = Math.round( data[i].temp-273.15);
+            pmax.innerText = Math.round( data[i].temp-273.15);
+            div1.setAttribute("class", "Rectangle");
+          div2.setAttribute("class", "Rectangle2");
+          div1.appendChild(div2); 
+          tdminmax.appendChild(pmin);
+          tdminmax.appendChild(div1);
+          tdminmax.appendChild(pmax);
+          }
+        tr.appendChild(tdzi);
+        tr.appendChild(tdpic);
+        tr.appendChild(tdnor);
+        tr.appendChild(tdminmax);
+        console.log(tr);
+        table.appendChild(tr);
+      }
+      
+      break
+    }
+    case "Daily":{
+      data=globalWeatherData.daily
+      const table = document.getElementsByClassName("Table")[0];
+      table.innerHTML = "";
+      for (let i = 0; i < data.length; i++) {
+        const tr = document.createElement("tr");
+        const tdzi = document.createElement("td");
+        const tdpic = document.createElement("td");
+        const tdnor = document.createElement("td");
+        const tdminmax = document.createElement("td");
+        const ppic = document.createElement("p");
+        const imgpic = document.createElement("img");
+        const imgnor = document.createElement("img");
+        const pmin = document.createElement("p");
+        const pmax = document.createElement("p");
+        const div1 = document.createElement("div");
+        const div2 = document.createElement("div");
+        tdzi.innerHTML = days[i];
+        if(data[i].rain){
+          ppic.innerText = data[i].rain + "%";
+        } else{
+          ppic.innerText = "0%"
+        }
+
+        
+        imgpic.setAttribute("src", "resurse/Picatura.svg");
+        tdpic.appendChild(imgpic);
+        tdpic.appendChild(ppic);
+        imgnor.setAttribute("src", "resurse/Fulger.svg");
+        tdnor.appendChild(imgnor);
+        // tdminmax.innerHTML=`${data[i].minDegrees}<div class="Rectangle"><div class="Rectangle2"></div></div> ${data[i].maxDegrees}`
+        pmin.innerText = Math.round( data[i].temp.min-273.15);
+        pmax.innerText = Math.round( data[i].temp.max-273.15);
+        div1.setAttribute("class", "Rectangle");
+        div2.setAttribute("class", "Rectangle2");
+        div1.appendChild(div2);
+        tdminmax.appendChild(pmin);
+        tdminmax.appendChild(div1);
+        tdminmax.appendChild(pmax);
+        tr.appendChild(tdzi);
+        tr.appendChild(tdpic);
+        tr.appendChild(tdnor);
+        tr.appendChild(tdminmax);
+        console.log(tr);
+        table.appendChild(tr);
+      }
+      break
+    } 
+    default:{
+      data=globalWeatherData.daily
+      const table = document.getElementsByClassName("Table")[0];
+      table.innerHTML = "";
+      for (let i = 0; i < data.length; i++) {
+        const tr = document.createElement("tr");
+        const tdzi = document.createElement("td");
+        const tdpic = document.createElement("td");
+        const tdnor = document.createElement("td");
+        const tdminmax = document.createElement("td");
+        const ppic = document.createElement("p");
+        const imgpic = document.createElement("img");
+        const imgnor = document.createElement("img");
+        const pmin = document.createElement("p");
+        const pmax = document.createElement("p");
+        const div1 = document.createElement("div");
+        const div2 = document.createElement("div");
+        tdzi.innerHTML = days[i];
+        ppic.innerText = data[i].rain + "%";
+        imgpic.setAttribute("src", "resurse/Picatura.svg");
+        tdpic.appendChild(imgpic);
+        tdpic.appendChild(ppic);
+        imgnor.setAttribute("src", "resurse/Fulger.svg");
+        tdnor.appendChild(imgnor);
+        // tdminmax.innerHTML=`${data[i].minDegrees}<div class="Rectangle"><div class="Rectangle2"></div></div> ${data[i].maxDegrees}`
+        pmin.innerText = Math.round( data[i].temp.min-273.15);
+        pmax.innerText = Math.round( data[i].temp.max-273.15);
+        div1.setAttribute("class", "Rectangle");
+        div2.setAttribute("class", "Rectangle2");
+        div1.appendChild(div2);
+        tdminmax.appendChild(pmin);
+        tdminmax.appendChild(div1);
+        tdminmax.appendChild(pmax);
+        tr.appendChild(tdzi);
+        tr.appendChild(tdpic);
+        tr.appendChild(tdnor);
+        tr.appendChild(tdminmax);
+        console.log(tr);
+        table.appendChild(tr);
+      }
+      break
+    }
+  }
+  
+  console.log(data);
 }
 
 function amongUsPopUp() {
@@ -313,6 +500,7 @@ function onecall(suggestions){
     .then((data) => {
       console.log(data)
       clickOnCity(data)
+      globalWeatherData=data
       load.classList.remove("loadVisible")
     });
   }

@@ -811,6 +811,9 @@ padding-bottom:40px;
   left: 50%;
   transform: translate(-50%,-50%);
 }
+.Table td{
+  gap: 6px;
+}
 
 }
 
