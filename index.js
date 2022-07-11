@@ -169,7 +169,9 @@ function changeData(city) {
 
   let divSimt=document.querySelector(".simt")
   divSimt.innerText = "Feels like "+Math.round( city.feelsLike)
+  console.log(city)
 
+  // holdsTwo(city)
 }
 
 function deleteCity() {
@@ -249,7 +251,7 @@ function suggestions(data) {
     wrapper.style.borderRadius = "0px";
     wrapper.style.borderTopRightRadius = "20px";
     wrapper.style.borderTopLeftRadius = "20px";
-    pSuggestions.onclick=() =>onecall(suggestions)
+    // pSuggestions.onclick=() =>holdsTwo(suggestions)
   });
 }
 
@@ -570,9 +572,11 @@ function clickOnCity(data){
   const cityName = document.getElementById("search").value;
   
 
-  console.log(data.current)
+ console.log()
   
-  arrayOfCities.push({ name: pSuggestions.innerHTML, grade: Math.round( data.current.temp-273.15), image: selectImage(pSuggestions.innerHTML), sunsetHours: new Date(data.current.sunset).getHours() ,sunsetMinutes: new Date(data.current.sunset).getMinutes(), sunriseHour: new Date(data.current.sunrise).getHours(), sunriseMinutes: new Date(data.current.sunrise).getMinutes(), feelsLike:  data.current.feels_like-273.15});  
+  arrayOfCities.push({ name: pSuggestions.innerHTML, grade: Math.round( data.current.temp-273.15), image: selectImage(pSuggestions.innerHTML), sunsetHours: new Date(data.current.sunset).getHours() ,sunsetMinutes: new Date(data.current.sunset).getMinutes(), sunriseHour: new Date(data.current.sunrise).getHours(), sunriseMinutes: new Date(data.current.sunrise).getMinutes(), feelsLike:  data.current.feels_like-273.15, lat:data.lat, lon: data.lon});  
+
+  console.log(data.lat)
 
   localStorage.setItem("cities", JSON.stringify(arrayOfCities));
 
@@ -645,4 +649,8 @@ function addImage(){
   image.setAttribute("src", name)
   
 }
+// function holdsTwo(city){
+//   console.log('aici')
+//   onecall(city)
 
+// }

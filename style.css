@@ -289,6 +289,10 @@ body {
   padding-right: 15px;
 }
 
+.Table::-webkit-scrollbar {
+  display: none;
+}
+
 .Table tr {
   display: flex;
   flex-direction: row;
