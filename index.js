@@ -106,23 +106,34 @@ function init(searchParam) {
 
 function init() {
   const div = document.querySelector(".imgs");
+  const gradeR = document.getElementById("grader")
   div.innerHTML = "";
+  gradeR.innerHTML = arrayOfCities[0].grade
+
   arrayOfCities.forEach((city) => {
     renderCities(city);
   });
   const pOras = document.getElementById("Oras");
   pOras.innerHTML = arrayOfCities[0].name;
+  selectedCity=arrayOfCities[0]
 }
 
 function renderCities(city) {
   const div = document.querySelector(".imgs");
   const img = document.createElement("img");
-  // <img>
-  img.setAttribute("src", city.url);
+  img.setAttribute("src", city.image);
   img.style.objectFit = `cover`;
   const divP = document.createElement("div");
   divP.setAttribute("class", "Poze");
-  divP.onclick = () => changeData(city);
+  const images = document.querySelectorAll(".Poze")
+  divP.onclick = () => {
+    changeData(city)
+    images.forEach( image => {
+      image.style.transform = "scale(1)"
+    })
+    divP.style.transform= "scale(1.1)"
+    
+  }
   const p = document.createElement("p");
   p.textContent = city.name;
   p.setAttribute("class", "City");
@@ -130,6 +141,9 @@ function renderCities(city) {
   divP.appendChild(p);
   div.appendChild(divP);
   closeModal();
+
+
+  
 }
 
 function changeData(city) {
@@ -139,6 +153,23 @@ function changeData(city) {
   pOras.innerHTML = city.name;
   let divGrader=document.getElementById("grader")
    divGrader.innerHTML = city.grade
+   
+
+   let psunset=document.getElementById("sunset/sunrise")
+  let dategol=new Date()
+   
+
+ 
+
+  if(dategol.getHours() < new Date(city.sunriseHour) ){
+    psunset.innerText = "sunrise "+ city.sunriseHour + ":" + city.sunriseMinutes
+
+  } else psunset.innerText = "sunset " + city.sunsetHours + ":" + city.sunsetMinutes
+
+
+  let divSimt=document.querySelector(".simt")
+  divSimt.innerText = "Feels like "+Math.round( city.feelsLike)
+
 }
 
 function deleteCity() {
@@ -151,6 +182,7 @@ function deleteCity() {
 }
 
 let selectedCity = arrayOfCities[0];
+
 function regenerate(event) {
   if (event.value === "") init();
 }
@@ -198,6 +230,8 @@ function logKey(ev) {
   if (ev.keyCode === 13) search();
 }
 
+const pSuggestions = document.createElement("p");
+
 function suggestions(data) {
   const divSuggestions = document.querySelector(".suggestions");
   const wrapper = document.querySelector(".wrapper");
@@ -205,7 +239,7 @@ function suggestions(data) {
 
   const suggestionsArray = data.list
   suggestionsArray.forEach((suggestions, i) => {
-    const pSuggestions = document.createElement("p");
+    
     pSuggestions.innerHTML = suggestions.name;
     if (i === index) {
       pSuggestions.style.background = "gray";
@@ -534,21 +568,81 @@ function clickOnCity(data){
   divSuggestions.innerHTML = "";
 
   const cityName = document.getElementById("search").value;
+  
 
-  arrayOfCities.push({ name: cityName, grade: Math.round( data.current.temp-273.15)});
+  console.log(data.current)
+  
+  arrayOfCities.push({ name: pSuggestions.innerHTML, grade: Math.round( data.current.temp-273.15), image: selectImage(pSuggestions.innerHTML), sunsetHours: new Date(data.current.sunset).getHours() ,sunsetMinutes: new Date(data.current.sunset).getMinutes(), sunriseHour: new Date(data.current.sunrise).getHours(), sunriseMinutes: new Date(data.current.sunrise).getMinutes(), feelsLike:  data.current.feels_like-273.15});  
+
   localStorage.setItem("cities", JSON.stringify(arrayOfCities));
 
   init();
+
+  addImage()
 }
 
 
+function selectImage(cityName){
+  let image
+  arrayOfImages.forEach(img => {
+    if(img.name == cityName){
+      image = img.image;
+    }
+  })
+  return image
+}
+
 const arrayOfImages = [
-  {name: 'iasi', image:''},
-  {name: 'bucuresti', image:''},
-  {name: 'cluj', image:''},
-  {name: 'chisinau', image:''}
+  {name: 'Iaşi', image: 'resurse/Iasi.jpg'},
+  {name: 'Bucharest', image: 'resurse/Bucuresti.jpg'},
+  {name: 'Cluj', image: 'resurse/Cluj.jpg'},
+  {name: 'Chisinau', image: 'resurse/Chisinau.jpg'},
+  {name: 'Vaslui', image: 'resurse/Vaslui.jpg'},
+  {name: 'Berlin', image: 'resurse/Berlin.jpg'},
+  {name: 'London', image: 'resurse/London.jpg'},
+  {name: 'Madrid', image: 'resurse/Madrid.jpg'},
+  {name: 'Rome', image: 'resurse/Rome.jpg'},
+  {name: 'Paris', image: 'resurse/Paris.jpg'},
+  {name: 'Wien', image: 'resurse/Vienna.jpg'},
+  {name: 'Hamburg', image: 'resurse/Hamburg.jpg'},
+  {name: 'Budapest', image: 'resurse/Budapest.jpg'},
+  {name: 'Barcelona', image: 'resurse/Barcelona.jpg'},
+  {name: 'Altstadt', image: 'resurse/Munich.jpg'},
+  {name: 'Milan', image: 'resurse/Milan.jpg'},
+  {name: 'Sofia', image: 'resurse/Sofia.jpg'},
+  {name: 'Prague', image: 'resurse/Prague.jpg'},
+  {name: 'Stockholm', image: 'resurse/Stockholm.jpg'},
+  {name: 'Frankfurt am Main', image: 'resurse/Frankfurt am Main.jpg'},
+  {name: 'Athens', image: 'resurse/Athens.jpg'},
+  {name: 'Helsinki', image: 'resurse/Helsinki.jpg'},
+  {name: 'Rotterdam', image: 'resurse/Rotterdam.jpg'},
+  {name: 'Copenhagen', image: 'resurse/Copenhagen.jpg'},
+  {name: 'Stuttgart', image: 'resurse/Stuttgart.jpg'},
+  {name: 'Amsterdam', image: 'resurse/Amsterdam.jpg'},
+  {name: 'Amsterdam', image: 'resurse/Amsterdam.jpg'},
+  {name: 'Amsterdam', image: 'resurse/Amsterdam.jpg'},
+  {name: 'Kyiv', image: 'resurse/Kiev.jpg'}
 ]
 
-// const addImage{
-//    const suggestions = document.getElementById('')
-// }
+
+// const image = document.createElement("img")
+//   image.setAttribute("src", "resurse/" + arrayOfCities.name + ".jpg")
+
+function addImage(){
+  const divP = document.querySelector(".Poze");
+  const images = document.querySelectorAll(".Poze img")
+  const image = images[images.length-1]
+  
+
+  let name 
+
+  for(let i=0; i<arrayOfImages.length; i++)
+  if(arrayOfImages[i].name == pSuggestions.innerHTML){
+   name = arrayOfImages[i].image
+   break;
+  }
+  
+  image.setAttribute("src", name)
+  
+}
+
