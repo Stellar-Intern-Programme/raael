@@ -209,9 +209,24 @@ function changeData(city) {
   } else
     psunset.innerText = "sunset " + city.sunsetHours + ":" + city.sunsetMinutes;
 
+  console.log("test")
+
+  const nor = document.getElementById("vremeMica")
+  const divNor = document.querySelector("II")
+  nor.src = ""
+  nor.setAttribute("src", "resurse/clear_sky.png")
+  nor.style.width = "40px"
+  nor.style.height = "40px"
+  
+
   let divSimt = document.querySelector(".simt");
   divSimt.innerText = "Feels like " + Math.round(city.feelsLike);
 }
+
+arrayOfMoods  = [
+  {mood:"Clear", img:'resurse/clear_sky.jpg'},
+  {mood:"Rain", img:'resurse/clear_sky.jpg'},
+]
 
 function deleteCity() {
   arrayOfCities = arrayOfCities.filter((city) => {
@@ -568,12 +583,7 @@ function onecall(suggestions, fromSearch = true) {
   divGradeCelius.innerHTML = "";
 
   fetch(
-    "https://api.openweathermap.org/data/2.5/onecall?lat=" +
-      suggestions.coord.lat +
-      "&lon=" +
-      suggestions.coord.lon +
-      "&APPID=" +
-      API_KEY
+    "https://api.openweathermap.org/data/2.5/onecall?lat=" + suggestions.coord.lat + "&lon=" +suggestions.coord.lon + "&APPID=" + API_KEY
   )
     .then((res) => res.json())
     .then((data) => {
@@ -640,10 +650,15 @@ function clickOnCity(data, suggestions, fromSearch) {
 
     localStorage.setItem("cities", JSON.stringify(arrayOfCities));
 
-    init();
+  console.log(data.current)
+  
+ 
+  
+  localStorage.setItem("cities", JSON.stringify(arrayOfCities));
 
-    addImage();
-  }
+  init();
+
+  addImage()
 }
 
 function selectImage(cityName) {
@@ -654,6 +669,7 @@ function selectImage(cityName) {
     }
   });
   return image;
+}
 }
 
 const arrayOfImages = [
@@ -706,6 +722,7 @@ function addImage() {
 
   image.setAttribute("src", name);
 }
+
 function holdsTwo(suggestions) {
   console.log("aici");
   if(arrayOfCities.some(e=>e.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")===valueInputSearch)) return
