@@ -118,6 +118,11 @@ function addCities() {
   init();
 }
 window.addEventListener("load", () => {
+  const deleteButton = document.getElementById("delete")
+
+  if(arrayOfCities.length === 1){
+  deleteButton.style.display = "none"
+  }
   init();
   changeData(arrayOfCities[0])
   initialData(arrayOfCities[0])
@@ -229,6 +234,12 @@ arrayOfMoods  = [
 ]
 
 function deleteCity() {
+  const deleteButton = document.getElementById("delete")
+
+if(arrayOfCities.length == 2){
+    console.log("test")
+    deleteButton.style.display = "none"
+  }
   arrayOfCities = arrayOfCities.filter((city) => {
     return city.name !== selectedCity.name;
   });
@@ -727,5 +738,7 @@ function holdsTwo(suggestions) {
   if(arrayOfCities.some(e=>e.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")===valueInputSearch)) return
   onecall(suggestions);
   renderWeatherData(suggestions);
+  const deleteButton = document.getElementById("delete")
+  deleteButton.style.display = "flex"
 }
 
