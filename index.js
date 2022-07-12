@@ -556,7 +556,7 @@ function hideAmongUsPopUp() {
   sus.style.display = "none";
 }
 
-const API_KEY = "6a46d8f38913f1e370228f934ad28c03";
+const API_KEY = "59e6705a31bdc621e9833c43e70eac15";
 
 function search() {
   const value = document.getElementById("search").value;
@@ -724,7 +724,6 @@ function addImage() {
 }
 
 function holdsTwo(suggestions) {
-  console.log("aici");
   if(arrayOfCities.some(e=>e.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")===valueInputSearch)) return
   onecall(suggestions);
   renderWeatherData(suggestions);
