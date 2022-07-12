@@ -11,6 +11,7 @@
 //     divP.appendChild(p)
 //     div.appendChild(divP)
 
+let valueInputSearch
 const weekDays = [
   "Sunday",
   "Monday",
@@ -108,8 +109,6 @@ function initialData(suggestions) {
     });
 }
 
-window.addEventListener('load', () => initialData(arrayOfCities[0]))
-
 function addCities() {
   const cityName = document.getElementById("city").value;
   const photoUrl = document.getElementById("url").value;
@@ -120,7 +119,9 @@ function addCities() {
 }
 window.addEventListener("load", () => {
   init();
-  initialData()
+  changeData(arrayOfCities[0])
+  initialData(arrayOfCities[0])
+  // initialData()
   searchInput = document.getElementById("search");
   let datele = document.getElementById("datele");
   datele.innerText =
@@ -147,9 +148,6 @@ function init(searchParam) {
 
   
 
-  window.addEventListener("load", (event) => {
-    init();
-  });
 }
 
 function init() {
@@ -176,11 +174,10 @@ function renderCities(city) {
   img.style.objectFit = `cover`;
   const divP = document.createElement("div");
   divP.setAttribute("class", "Poze");
-  const images = document.querySelectorAll(".Poze");
+  const images = document.querySelector(".imgs");
   divP.onclick = () => {
     changeData(city);
-    console.log(city);
-    images.forEach((image) => {
+    images.childNodes.forEach((image) => {
       image.style.transform = "scale(1)";
     });
     onecall(city, false);
@@ -284,9 +281,6 @@ function suggestions(data) {
   const suggestionsArray = data.list;
   suggestionsArray.forEach((suggestions, i) => {
     pSuggestions.innerHTML = suggestions.name;
-    if (i === index) {
-      pSuggestions.style.background = "gray";
-    }
     divSuggestions.appendChild(pSuggestions);
     divSuggestions.style.display = "flex";
     wrapper.style.borderRadius = "0px";
@@ -438,6 +432,12 @@ function renderWeatherData(click) {
       data = globalWeatherData.daily;
       const table = document.getElementsByClassName("Table")[0];
       table.innerHTML = "";
+      const allMaxTemperatures=data.map(t=>t.temp.max)
+      const allMinTemperatures=data.map(t=>t.temp.min)
+      const maxTemperature=Math.max(...allMaxTemperatures)
+      const minTemperature=Math.min(...allMinTemperatures)
+      const dif=maxTemperature-minTemperature
+
       for (let i = 0; i < data.length; i++) {
         const tr = document.createElement("tr");
         const tdzi = document.createElement("td");
@@ -457,7 +457,7 @@ function renderWeatherData(click) {
         } else {
           ppic.innerText = "0%";
         }
-
+        div2.style=`width:calc(${data[i].temp.max-data[i].temp.min}*100%/${dif});margin-left:calc(${data[i].temp.min-minTemperature}*100%/${dif});`
         imgpic.setAttribute("src", "resurse/Picatura.svg");
         tdpic.appendChild(imgpic);
         tdpic.appendChild(ppic);
@@ -545,6 +545,7 @@ const API_KEY = "6a46d8f38913f1e370228f934ad28c03";
 
 function search() {
   const value = document.getElementById("search").value;
+  valueInputSearch = document.getElementById("search").value;
 
   fetch(
     "https://api.openweathermap.org/data/2.5/find?q=" +
@@ -707,6 +708,8 @@ function addImage() {
 }
 function holdsTwo(suggestions) {
   console.log("aici");
+  if(arrayOfCities.some(e=>e.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")===valueInputSearch)) return
   onecall(suggestions);
   renderWeatherData(suggestions);
 }
+
