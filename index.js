@@ -169,7 +169,23 @@ function changeData(city) {
   let divSimt=document.querySelector(".simt")
   divSimt.innerText = "Feels like "+Math.round( city.feelsLike)
 
+  console.log("test")
+
+  // const nor = document.getElementById("vremeMica")
+  // const divNor = document.querySelector("II")
+  // nor.src = ""
+  // nor.setAttribute("src", "resurse/clear_sky.png")
+  // divNor.style.gap= "15px"
+  // nor.style.width = "50px"
+  // nor.style.height = "20px"
+  
+
 }
+
+arrayOfMoods  = [
+  {mood:"Clear", img:'resurse/clear_sky.jpg'},
+  {mood:"Rain", img:'resurse/clear_sky.jpg'},
+]
 
 function deleteCity() {
   arrayOfCities = arrayOfCities.filter((city) => {
@@ -240,9 +256,9 @@ function suggestions(data) {
   suggestionsArray.forEach((suggestions, i) => {
     
     pSuggestions.innerHTML = suggestions.name;
-    if (i === index) {
-      pSuggestions.style.background = "gray";
-    }
+    // if (i === index) {
+    //   pSuggestions.style.background = "gray";
+    // }
     divSuggestions.appendChild(pSuggestions);
     divSuggestions.style.display = "flex";
     wrapper.style.borderRadius = "0px";
@@ -384,8 +400,8 @@ function clickOnCity(data){
 
   console.log(data.current)
   
-  arrayOfCities.push({ name: pSuggestions.innerHTML, grade: Math.round( data.current.temp-273.15), image: selectImage(pSuggestions.innerHTML), sunsetHours: new Date(data.current.sunset).getHours() ,sunsetMinutes: new Date(data.current.sunset).getMinutes(), sunriseHour: new Date(data.current.sunrise).getHours(), sunriseMinutes: new Date(data.current.sunrise).getMinutes(), feelsLike:  data.current.feels_like-273.15});  
-
+  arrayOfCities.push({ name: pSuggestions.innerHTML, grade: Math.round( data.current.temp-273.15), image: selectImage(pSuggestions.innerHTML), sunsetHours: new Date(data.current.sunset).getHours() ,sunsetMinutes: new Date(data.current.sunset).getMinutes(), sunriseHour: new Date(data.current.sunrise).getHours(), sunriseMinutes: new Date(data.current.sunrise).getMinutes(), feelsLike:  data.current.feels_like-273.15, mood:data.current.weather[0].main});  
+  
   localStorage.setItem("cities", JSON.stringify(arrayOfCities));
 
   init();
