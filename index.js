@@ -567,7 +567,7 @@ function hideAmongUsPopUp() {
   sus.style.display = "none";
 }
 
-const API_KEY = "59e6705a31bdc621e9833c43e70eac15";
+const API_KEY = "65539ad8db6decabb65003dae4b719ce";
 
 function search() {
   const value = document.getElementById("search").value;
